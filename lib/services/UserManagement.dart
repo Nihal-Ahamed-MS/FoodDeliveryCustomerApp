@@ -13,7 +13,7 @@ class UserManagement{
             .snapshots();
   }
 
-  storeCurrentItemList(user,String foodName, String foodPrice,String hotelID) async {
+  storeCurrentItemList(user,String foodName, String foodPrice,int quantity,String hotelID) async {
 
     Firestore.instance.collection('UserRecentList').document(user.uid).setData({
         'name' : user.email
@@ -23,9 +23,13 @@ class UserManagement{
       {
         'name' : foodName,
         'price' : foodPrice,
-        'hotelId' : hotelID
+        'hotelId' : hotelID,
+        'quantity' : quantity
       }
-    );
+    ).then((value) => print('succesffully for saved'))
+      .catchError((e){
+        print(e);
+      });
   }
 
   getStoreCurrentItemList(uid) async{
