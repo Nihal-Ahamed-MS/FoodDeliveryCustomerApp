@@ -9,6 +9,20 @@ class Maps extends StatefulWidget {
    _MapsState createState() => _MapsState();
 }
 class _MapsState extends State<Maps> {
+
+  var points = <LatLng>[
+    new LatLng(11.41,79.67203),
+     new LatLng(11.398,79.673),
+     new LatLng(11.387,79.677),
+    new LatLng(11.3756,79.687),
+     new LatLng(11.374,79.690),
+     new LatLng(11.383,79.715),
+     new LatLng(11.402,79.719),
+     new LatLng(11.423,79.708),
+     new LatLng(11.428,79.687),
+     new LatLng(11.41,79.67203),
+  ];
+
    @override
    Widget build(BuildContext context) {
     return Scaffold(
@@ -57,13 +71,25 @@ class _MapsState extends State<Maps> {
                       padding: EdgeInsets.only(top:15.0,bottom: 15.0),
                       child: FlutterMap(
                           options: MapOptions(
-                            minZoom: 10.0,
+                            minZoom: 1.0,
                             center: LatLng(11.4070,79.6912)
                           ),    
                           layers: [
                             TileLayerOptions(
-                              urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                              subdomains: ['a','b','c']
+                              urlTemplate: "https://api.mapbox.com/styles/v1/lucifer-king/ckcgiqpa4145z1jo5dfp7pd0q/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibHVjaWZlci1raW5nIiwiYSI6ImNrY2dpajN5YzAzNHkyeHM1bXpmcDR5YWsifQ.EltsmZxxPg8Y6P70qdBrmA",
+                              additionalOptions: {
+                                'accessToken' : 'pk.eyJ1IjoibHVjaWZlci1raW5nIiwiYSI6ImNrY2dpbDk3bjBmeWwyeHFxM2tlbmN3cGYifQ.TpPHLmlFiMUZjqFj2tAgEg',
+                                'id' : 'mapbox.mapbox-streets-v8'
+                              }
+                            ),
+                            PolylineLayerOptions(
+                              polylines : [
+                                Polyline(
+                                  points: points,
+                                  strokeWidth: 5.0,
+                                  color: Colors.blue
+                                )
+                              ]
                             )
                           ],
                       ),
@@ -85,7 +111,7 @@ class _MapsState extends State<Maps> {
                               child: Text("View",style: TextStyle(fontSize: 20.0,color: Colors.blueAccent) 
                             )),
                             SizedBox(width: 5.0,),
-                            IconButton(icon: Icon(Icons.keyboard_arrow_right),onPressed: (){},)
+                            //IconButton(icon: Icon(Icons.keyboard_arrow_right),onPressed: (){},)
                           ],
                         ),
                       ),
