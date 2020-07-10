@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:customerapp/services/UserManagement.dart';
@@ -13,6 +14,8 @@ class _CartPageState extends State<CartPage> {
   FirebaseUser user;
   Stream _currentOrder;
   String _uid;
+
+  _CalculateState _calculateState = _CalculateState();
 
  getUser() async {
     FirebaseUser firebaseUser = await firebaseAuth.currentUser();
@@ -49,10 +52,34 @@ class _CartPageState extends State<CartPage> {
    @override
    Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Cart'),
-      ),
-      body: cartList(),
+      backgroundColor: Colors.blueAccent,
+       body: Stack(
+         children: <Widget>[
+           Positioned(
+              child: AppBar(
+              backgroundColor: Colors.transparent,
+              centerTitle: true,
+              title: Text("Cart", style: TextStyle(fontSize: 20.0, fontFamily: 'Montserrat')),
+            ),
+           ),
+            SizedBox(height: 50),
+              Positioned(
+                top: 80.0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      // topLeft: Radius.circular(45.0),
+                      // topRight: Radius.circular(45.0),
+                    ),
+                    color: Colors.white
+                  ),
+                  height: MediaQuery.of(context).size.height - 50.0,
+                  width: MediaQuery.of(context).size.width,
+                )
+              ),
+           cartList()
+         ],
+       )
     );
   }
 
@@ -61,6 +88,9 @@ class _CartPageState extends State<CartPage> {
     if(_currentOrder != null){
       return Column(
         children: <Widget>[
+           Container(
+                height: 100.0,
+              ),
           Expanded(
             child :  StreamBuilder(
           stream: _currentOrder,
@@ -71,10 +101,14 @@ class _CartPageState extends State<CartPage> {
                 itemBuilder: (BuildContext context,i){
                   return Card(
                  child: ListTile(
+                   leading: Text(snapshot.data.documents[i].data['quantity'].toString() + " " + " x "),
                     title: Text(snapshot.data.documents[i].data['name']),
                     subtitle : Text(snapshot.data.documents[i].data['price']),
                     trailing: IconButton(icon: Icon(Icons.delete), onPressed: (){
                       _userManagement.deletData(_uid, snapshot.data.documents[i].documentID);
+                      
+                      _calculateState._getAmount();
+                      
                     }),
                   ),
                 );
@@ -83,25 +117,9 @@ class _CartPageState extends State<CartPage> {
           },
         ),
       ),
-      Container(
-        padding: EdgeInsets.all(10.0),
-        child: SizedBox(
-          height: 50.0,
-          width: double.infinity,
-          child: RaisedButton(
-            onPressed: (){
-              _userManagement.placeOrder(_uid);
-            },
-            child: Text('Place Order',style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 25
-              ),
-            ),
-            color: Colors.blue,
-          ),
-        )
-      )
+      Calculate(id : _uid),
+      
+      
         ],
       );
     }
@@ -109,4 +127,160 @@ class _CartPageState extends State<CartPage> {
       return Text('Loading. Please Wait for a second.....');
     }
   }
+
 } 
+
+class Calculate extends StatefulWidget {
+  final id;
+  Calculate({this.id});
+  @override
+  _CalculateState createState() => _CalculateState();
+}
+
+class _CalculateState extends State<Calculate> {
+
+  UserManagement _userManagement = UserManagement();
+
+  List<int> sum = [];
+
+  int _total = 0;
+
+  int _grandTotal = 0;
+
+  int incre=0;
+
+  _getAmount() async{
+     return await Firestore.instance.collection('UserRecentList')
+            .document(widget.id)
+            .collection('CurrentList')
+            .snapshots()
+            .listen((value) => value.documents.forEach((element) {
+              int tempPrice=0;
+              int tempQuantity=0;
+              int tempTotal = 0;  
+            setState(() {
+              tempPrice = int.parse(element['price']); 
+              tempQuantity = element['quantity'];
+              tempTotal = tempPrice * tempQuantity;
+              });
+              
+              if(tempTotal!=null){
+                sum.add(tempTotal);
+                setState(() {
+                  tempTotal = null;
+                });
+              }
+              incre++;
+              if(value.documents.length == incre){
+                _calculate();
+                setState(() {
+                  incre = 0;
+                });
+              }
+          }));
+  }
+
+    _calculate(){
+          if (sum.isNotEmpty) {
+                setState(() {
+                  _total =0;
+                  _grandTotal = 0;
+                });
+                for (var i = 0; i < sum.length; i++) {
+                     print(_total);
+                    _total+=sum[i];
+                   
+                  
+              }
+              setState(() {
+                _grandTotal = _total +40;
+              });
+              sum.clear();
+              }
+     }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getAmount();
+    _total=0;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Container(
+            padding: EdgeInsets.all(20.0),
+           child: Material(
+              elevation: 7.0,
+              borderRadius: BorderRadius.circular(5.0),
+               child: Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text("Sub-Total :", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22,color: Colors.black)),
+                        
+                        Text("₹ " + _total.toString(), style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22,color: Colors.grey[500]))
+                      ],
+                    ),
+                    SizedBox(height: 10.0,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text("Delivery Charges :", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22,color: Colors.black)),
+                        
+                        Text("₹ 30", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22,color: Colors.grey[500]))
+                      ],
+                    ),
+                    SizedBox(height: 10.0,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text("Parcel Charges :", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22,color: Colors.black)),
+                        
+                        Text("₹ 10", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22,color: Colors.grey[500]))
+                      ],
+                    ),
+                    SizedBox(height: 10.0,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text("Total :", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22,color: Colors.black)),
+                        
+                        Text("₹ " + _grandTotal.toString(), style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22,color: Colors.grey[500]))
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ),
+          Container(
+        padding: EdgeInsets.all(10.0),
+        child: SizedBox(
+          height: 50.0,
+          width: double.infinity,
+          child: RaisedButton(
+            onPressed: (){
+              _userManagement.placeOrder(widget.id,_grandTotal);
+            },
+            child: Text('Place Order',style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 25
+              ),
+            ),
+            color: Colors.blueAccent,
+          ),
+        )
+      ),
+      ],
+    );
+  }
+}

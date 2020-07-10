@@ -51,12 +51,13 @@ class UserManagement{
       });
     }
 
-   placeOrder(String userID){
+   placeOrder(String userID,int total){
      Firestore.instance.collection('PlaceOrder').add(
        {
          'userId' : userID,
          'timestamp': DateTime.now().toUtc().millisecondsSinceEpoch,
-         'delivered' : false
+         'delivered' : false,
+         'total' : total,
        }
      );
    }
