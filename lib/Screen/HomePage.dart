@@ -1,4 +1,4 @@
-
+import '../Maps/Map.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -71,7 +71,9 @@ class _HomePageState extends State<HomePage> {
          children: <Widget>[
            Positioned(
                 child: AppBar(
-                  leading: IconButton(icon: Icon(Icons.location_on), onPressed: (){}),
+                  leading: IconButton(icon: Icon(Icons.location_on), onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Maps()));
+                  }),
                   backgroundColor: Colors.transparent,
                   centerTitle: true,
                   title: Text("UI MART", style: TextStyle(fontSize: 20.0, fontFamily: 'Montserrat')),
