@@ -2,12 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 
 class UserManagement{
+
+  Firestore ref = Firestore.instance;
+
   getData()async{
-    return await Firestore.instance.collection('HotelManagement').snapshots();
+    return await ref.collection('HotelManagement').snapshots();
   }
 
   getHotelMenu(String docID)async{
-    return await Firestore.instance.collection('HotelManagement')
+    return await ref.collection('HotelManagement')
             .document(docID)
             .collection('HotelMenu')
             .snapshots();
@@ -15,11 +18,11 @@ class UserManagement{
 
   storeCurrentItemList(user,String foodName, String foodPrice,int quantity,String hotelID) async {
 
-    Firestore.instance.collection('UserRecentList').document(user.uid).setData({
+   ref.collection('UserRecentList').document(user.uid).setData({
         'name' : user.email
       });
 
-    return await Firestore.instance.collection('UserRecentList').document(user.uid).collection('CurrentList').add(
+    return await ref.collection('UserRecentList').document(user.uid).collection('CurrentList').add(
       {
         'name' : foodName,
         'price' : foodPrice,
@@ -33,26 +36,26 @@ class UserManagement{
   }
 
   getStoreCurrentItemList(uid) async{
-     return await Firestore.instance.collection('UserRecentList')
+     return await ref.collection('UserRecentList')
             .document(uid)
             .collection('CurrentList')
             .snapshots();
   }
 
   updateData(user,selectedDoc,newValues){
-       Firestore.instance.collection('UserRecentList').document(user.uid).collection('CurrentList').document(selectedDoc).updateData(newValues).catchError((e){
+      ref.collection('UserRecentList').document(user.uid).collection('CurrentList').document(selectedDoc).updateData(newValues).catchError((e){
          print(e);
        });
     }
 
     deletData(uid,docId){
-      Firestore.instance.collection('UserRecentList').document(uid).collection('CurrentList').document(docId).delete().catchError((e){
+      ref.collection('UserRecentList').document(uid).collection('CurrentList').document(docId).delete().catchError((e){
         print(e);
       });
     }
 
    placeOrder(String userID,int total){
-     Firestore.instance.collection('PlaceOrder').add(
+     ref.collection('PlaceOrder').add(
        {
          'userId' : userID,
          'timestamp': DateTime.now().toUtc().millisecondsSinceEpoch,

@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'SignIn.dart';
 import 'package:customerapp/Screen/MyBottomNavigationBar.dart';
-import 'package:customerapp/Screen/HomePage.dart';
 
 
 class SignUp extends StatefulWidget {
@@ -240,94 +239,3 @@ class _SignUpState extends State<SignUp> {
     );
   }
 } 
-
-/*Container(
-                 padding: EdgeInsets.all(50.0),
-                 child: Form(
-                   key: _formKey,
-                   child: Column(
-                     children: <Widget>[
-                       Container(
-                         padding: EdgeInsets.only(top:20.0),
-                         child: TextFormField(
-                           validator: (input){
-                             if(input.isEmpty)
-                             {
-                               return "Provide an NAME";
-                             }
-                           },
-                           decoration: InputDecoration(
-                             labelText: 'Name',
-                             border: OutlineInputBorder(
-                               borderRadius: BorderRadius.circular(5.0),
-                              
-                             )
-                           ),
-                           onSaved: (input) => _name = input,
-                         ),
-                       ),
-                       Container(
-                         padding: EdgeInsets.only(top:20.0),
-                         child: TextFormField(
-                           validator: (input){
-                             if(input.isEmpty)
-                             {
-                               return "Provide an email";
-                             }
-                           },
-                           decoration: InputDecoration(
-                             labelText: 'Email',
-                             border: OutlineInputBorder(
-                               borderRadius: BorderRadius.circular(5.0),
-                              
-                             )
-                           ),
-                           onSaved: (input) => _email = input,
-                         ),
-                       ),
-                        Container(
-                         padding: EdgeInsets.only(top:20.0),
-                         child: TextFormField(
-                           validator: (input){
-                             if(input.length < 6)
-                             {
-                               return "6 character is must";
-                             }
-                           },
-                           decoration: InputDecoration(
-                             labelText: 'Password',
-                             border: OutlineInputBorder(
-                               borderRadius: BorderRadius.circular(5.0),
-                              
-                             )
-                           ),
-                           onSaved: (input) => _pass = input,
-                           obscureText: true,
-                         ),
-                       ),
-                       Container(
-                        padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                        child: RaisedButton(
-                          
-                          color: Colors.blue,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0)
-                          )                          ,
-                          onPressed: signup,
-                          child: Text(
-                            "Sign Up",
-                            style: TextStyle(fontSize: 20.0, color: Colors.white)
-                          ),
-                        ),
-                       ),
-                       GestureDetector(
-                         onTap: navigateToSignin,
-                         child: Text("Already having an account?",
-                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20.0),
-                        )
-                       ),
-                     ],
-                   ),
-                 ) 
-               )*/

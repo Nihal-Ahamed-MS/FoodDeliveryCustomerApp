@@ -10,18 +10,6 @@ class Maps extends StatefulWidget {
 }
 class _MapsState extends State<Maps> {
 
-  var points = <LatLng>[
-    new LatLng(11.41,79.67203),
-     new LatLng(11.398,79.673),
-     new LatLng(11.387,79.677),
-    new LatLng(11.3756,79.687),
-     new LatLng(11.374,79.690),
-     new LatLng(11.383,79.715),
-     new LatLng(11.402,79.719),
-     new LatLng(11.423,79.708),
-     new LatLng(11.428,79.687),
-     new LatLng(11.41,79.67203),
-  ];
 
    @override
    Widget build(BuildContext context) {
@@ -82,15 +70,7 @@ class _MapsState extends State<Maps> {
                                 'id' : 'mapbox.mapbox-streets-v8'
                               }
                             ),
-                            PolylineLayerOptions(
-                              polylines : [
-                                Polyline(
-                                  points: points,
-                                  strokeWidth: 5.0,
-                                  color: Colors.blue
-                                )
-                              ]
-                            )
+                            
                           ],
                       ),
                     ),
@@ -110,8 +90,7 @@ class _MapsState extends State<Maps> {
                               },
                               child: Text("View",style: TextStyle(fontSize: 20.0,color: Colors.blueAccent) 
                             )),
-                            SizedBox(width: 5.0,),
-                            //IconButton(icon: Icon(Icons.keyboard_arrow_right),onPressed: (){},)
+                            SizedBox(width: 10.0,),
                           ],
                         ),
                       ),
@@ -120,12 +99,3 @@ class _MapsState extends State<Maps> {
     );
   }
 } 
-
-
-/*onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyLocation(),));
-                },
-                
-                
-                
-                */

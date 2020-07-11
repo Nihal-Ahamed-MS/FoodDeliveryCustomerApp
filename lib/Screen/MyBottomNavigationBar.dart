@@ -3,59 +3,7 @@ import 'Cart.dart';
 import 'Offers.dart';
 import 'HomePage.dart';
 import 'User.dart';
-// class MyBottomNavigationBar extends StatefulWidget {
-//   @override
-//    _MyBottomNavigationBarState createState() => _MyBottomNavigationBarState();
-// }
-// class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
-//    @override
 
-//   int _selectedIndex = 0;
-
-//   final _screens = [
-//     HomePage(),
-//     OffersPage(),
-//     CartPage(),
-//     UserPage()
-//   ];
-
-//    Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: _screens[_selectedIndex],
-//        bottomNavigationBar: BottomNavigationBar(
-//          type: BottomNavigationBarType.fixed,
-//          currentIndex: _selectedIndex,
-//          items: [
-//            BottomNavigationBarItem(
-//              icon: Icon(Icons.home),
-//              title: Text('Home'),
-//              backgroundColor: Colors.blue
-//            ),
-//            BottomNavigationBarItem(
-//              icon: Icon(Icons.local_offer),
-//              title: Text('Offers'),
-//              backgroundColor: Colors.blue
-//            ),
-//            BottomNavigationBarItem(
-//              icon: Icon(Icons.shopping_cart),
-//              title: Text('Cart'),
-//              backgroundColor: Colors.blue
-//            ),
-//            BottomNavigationBarItem(
-//              icon: Icon(Icons.person),
-//              title: Text('Profile'),
-//              backgroundColor: Colors.blue
-//            ),
-//          ],
-//          onTap: (index){
-//            setState(() {
-//              _selectedIndex = index;  
-//            });
-//          },
-//        ),
-//     );
-//   }
-// } 
 
 class MyBottomNavigationBar extends StatefulWidget {
   @override

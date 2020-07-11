@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                       child: Text('11/733, Natrajar Kovil Street,',style: TextStyle(color: Colors.white,fontSize: 20),),
+                       child: Text('21, West Car Street,',style: TextStyle(color: Colors.white,fontSize: 20),),
                     ),
                    
                   ],
@@ -257,42 +257,3 @@ class HoteMenuScreen {
 
 
 
-
-
-//hotelinfo.documents[i].data['name']
-
-
-/*Container(
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: 100.0,
-              ),
-              Text("Restaurents you may look for...",
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black
-                  ),
-              ), 
-              SizedBox(height: 30.0,),
-              
-            ],
-          ), 
-         ), */
-
-
-       /*Container(
-        child: StreamBuilder(
-          stream: hotelinfo,
-          builder: (context,snapshot){
-            return ListView.builder(
-                padding: EdgeInsets.all(5.0),
-                itemCount: snapshot.data.documents.length,
-                itemBuilder: (BuildContext context,i){
-                  return buildFittedBox(snapshot.data.documents[i].data['name'],snapshot.data.documents[i].data['name'],snapshot.data.documents[i].data['name']);
-                },
-              );
-          },
-        ),
-      );*/

@@ -1,4 +1,3 @@
-import 'package:flushbar/flushbar_route.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flushbar/flushbar.dart';
@@ -334,7 +333,3 @@ FirebaseUser user;
   }
 } 
 
-/*itemList.add( snapshot.data.documents[i].data['food']);
-                      // int price = int.parse(snapshot.data.documents[i].data['price']) ;
-                      // itemList.add(price);
-                      print(itemList);*/

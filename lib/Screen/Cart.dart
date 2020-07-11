@@ -270,7 +270,7 @@ class _CalculateState extends State<Calculate> {
             onPressed: (){
               _userManagement.placeOrder(widget.id,_grandTotal);
             },
-            child: Text('Place Order',style: TextStyle(
+            child: Text('Checkout',style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 25
