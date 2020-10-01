@@ -1,16 +1,31 @@
-# customerapp
+# Customer App (Food Delivery Project)
 
-A new Flutter project.
+Custoemr App is part Food Delivery project developed in Flutter wiht Firebase as backend.
+# Features!
 
-## Getting Started
+  - We can order food from local shops.
+  - You track your order
 
-This project is a starting point for a Flutter application.
+### Installation
 
-A few resources to get you started if this is your first Flutter project:
+For installation you can simple clone the repository and run it on vscode or any editor. 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Pull Request
+Pull Requests are welcome. Please follow these rules for the ease of understanding:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Make sure to check for available issues before raising one
+- Give me a maximum of 24-48 hours to respond
+- Have proper documentation on the parts you are changing/adding
+
+### Devloped and maintained by
+
+📸 [Instagram](https://www.instagram.com/lucifer_the_king/?hl=en)
+🧳 [LinkdIn](https://www.linkedin.com/in/nihal-ahamed-m-s-7b6808190/)
+
+License
+----
+MIT
+
+
+**MADE WITH 💖, HAPPY CODING!**
+
