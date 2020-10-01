@@ -19,7 +19,7 @@ Pull Requests are welcome. Please follow these rules for the ease of understandi
 
 ### Devloped and maintained by
 
-📸 [Instagram](https://www.instagram.com/lucifer_the_king/?hl=en)
+📸 [Instagram](https://www.instagram.com/lucifer_the_king/?hl=en) <br /> 
 🧳 [LinkdIn](https://www.linkedin.com/in/nihal-ahamed-m-s-7b6808190/)
 
 License
